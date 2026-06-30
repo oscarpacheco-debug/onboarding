@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intern Onboarding — Off-Page Team</title>
+<style>
+:root {
+  --pp: #5A52FF; --pp-l: #ECEAFF; --pp-d: #3D36CC;
+  --gr: #0FC4B2; --gr-l: #E7F9F7;
+  --ye: #FFB81D; --ye-l: #FFF7E8;
+  --bl: #4C89FF; --bl-l: #DBE7FF;
+  --rd: #DC2626; --rd-l: #FEF2F2;
+  --n1: #F7F7F9; --n2: #EEEFF2; --n4: #B0B3C0; --n6: #63697F; --n9: #111827;
+  --wh: #FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--n1);color:var(--n9);font-size:14px;line-height:1.5}
+
+.hdr{background:var(--pp);height:52px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 10px rgba(90,82,255,.35)}
+.hdr-l{display:flex;align-items:center;gap:10px}
+.hdr-logo{width:28px;height:28px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hdr-logo svg{width:16px;height:16px}
+.hdr-title{color:#fff;font-size:14px;font-weight:700}
+.hdr-sub{color:rgba(255,255,255,.5);font-size:12px;margin-left:6px}
+.hdr-pill{background:rgba(255,255,255,.15);color:#fff;border-radius:16px;padding:3px 10px;font-size:11px;font-weight:600}
+
+.layout{display:grid;grid-template-columns:224px 1fr;min-height:calc(100vh - 52px)}
+
+.sb{background:var(--wh);border-right:1px solid var(--n2);padding:16px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto;display:flex;flex-direction:column;gap:0}
+.sb-sec{margin-bottom:8px}
+.sb-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--n4);padding:0 16px;margin-bottom:4px}
+.sb-item{padding:8px 16px;cursor:pointer;display:flex;align-items:center;gap:9px;border-left:3px solid transparent;transition:all .1s;font-size:12px;color:var(--n6)}
+.sb-item:hover{background:var(--n1);color:var(--n9)}
+.sb-item.on{background:var(--pp-l);border-left-color:var(--pp);color:var(--pp);font-weight:600}
+.sb-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+.av-it{background:var(--gr)} .av-it2{background:var(--ye);color:var(--n9)} .av-fr{background:var(--bl)} .av-all{background:var(--pp)}
+.sb-prog{height:3px;background:var(--n2);border-radius:2px;margin-top:4px;overflow:hidden;width:100%}
+.sb-pf{height:100%;border-radius:2px;transition:width .3s}
+.pf-it{background:var(--gr)} .pf-it2{background:var(--ye)} .pf-fr{background:var(--bl)} .pf-all{background:var(--pp)}
+.sb-div{height:1px;background:var(--n2);margin:10px 0}
+
+.main{padding:20px 24px 80px;overflow-y:auto}
+
+.tabs{display:flex;gap:3px;background:var(--wh);border-radius:10px;padding:4px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tab{flex:1;padding:6px 10px;border:none;background:transparent;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;color:var(--n6);font-family:inherit;transition:all .12s}
+.tab:hover{color:var(--n9)}
+.tab.on{background:var(--pp);color:#fff;box-shadow:0 2px 8px rgba(90,82,255,.3)}
+.view{display:none}.view.on{display:block}
+
+.wk-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.wk-title{font-size:20px;font-weight:800;color:var(--n9);letter-spacing:-.3px}
+.wk-sub{font-size:12px;color:var(--n6);margin-top:3px}
+.wk-pills{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
+.wk-pill{background:var(--wh);border:1px solid var(--n2);border-radius:16px;padding:4px 12px;font-size:11px;color:var(--n6);display:flex;align-items:center;gap:4px}
+.wk-pill strong{font-weight:700;color:var(--n9)}
+.wk-pill.urg{background:var(--rd-l);border-color:#FECACA;color:var(--rd)}
+
+.notice{border-radius:9px;padding:11px 14px;margin-bottom:16px;display:flex;gap:9px;font-size:12px;line-height:1.55}
+.n-warn{background:var(--ye-l);border-left:3px solid var(--ye);color:#7A5500}
+.n-info{background:var(--bl-l);border-left:3px solid var(--bl);color:#1D5FCC}
+.n-ok{background:var(--gr-l);border-left:3px solid var(--gr);color:#0a6b64}
+.notice b{font-weight:700}
+
+.cal-wrap{overflow-x:auto;margin-bottom:24px}
+.cal{min-width:760px}
+.cal-hdr{display:grid;grid-template-columns:64px repeat(5,1fr);gap:3px;margin-bottom:3px}
+.cal-hdr-cell{padding:6px 8px;text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--n6);background:var(--n1);border-radius:6px}
+.cal-body{display:grid;grid-template-columns:64px repeat(5,1fr);gap:3px}
+.cal-time{font-size:9px;color:var(--n4);padding:3px 4px;text-align:right;display:flex;align-items:center;justify-content:flex-end;height:36px}
+.cal-col{display:flex;flex-direction:column;gap:3px;position:relative}
+.cal-hour{height:36px;background:var(--n1);border-radius:4px;position:relative}
+.cal-block{position:absolute;left:0;right:0;border-radius:5px;padding:2px 5px;font-size:9px;font-weight:600;overflow:hidden;cursor:pointer;z-index:1;transition:opacity .1s;line-height:1.3}
+.cal-block:hover{opacity:.85;z-index:2}
+.cb-training{background:var(--pp-l);color:var(--pp);border-left:3px solid var(--pp)}
+.cb-task{background:var(--gr-l);color:#0a6b64;border-left:3px solid var(--gr)}
+.cb-read{background:#FFF0F4;color:#9D174D;border-left:3px solid #FF6C95}
+.cb-market{background:var(--ye-l);color:#7A5500;border-left:3px solid var(--ye)}
+.cb-urgent{background:var(--rd-l);color:var(--rd);border-left:3px solid var(--rd)}
+.cal-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;margin-bottom:20px}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--n6)}
+.leg-dot{width:10px;height:10px;border-radius:2px}
+
+.days{display:flex;flex-direction:column;gap:10px}
+.day-card{background:var(--wh);border-radius:11px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.day-hdr{padding:10px 16px;display:flex;align-items:center;gap:10px;background:var(--n1);border-bottom:1px solid var(--n2);cursor:pointer;user-select:none}
+.day-name{font-size:13px;font-weight:700;color:var(--n9);min-width:90px}
+.day-date{font-size:11px;color:var(--n6)}
+.day-stats{margin-left:auto;display:flex;gap:8px;font-size:10px;color:var(--n4)}
+.day-chevron{font-size:11px;color:var(--n4);transition:transform .15s;margin-left:4px}
+.day-chevron.open{transform:rotate(90deg)}
+.day-body{display:none}.day-body.open{display:block}
+
+.slot{display:grid;grid-template-columns:80px 1fr auto;gap:0;border-bottom:1px solid var(--n1);min-height:52px}
+.slot:last-child{border-bottom:none}
+.slot:hover{background:#FAFAFE}
+.slot-time{padding:10px 12px 10px 16px;font-size:11px;color:var(--n4);font-weight:600;border-right:1px solid var(--n1);display:flex;flex-direction:column;justify-content:center;gap:1px;background:rgba(247,247,249,.4)}
+.slot-time small{font-size:9px;font-weight:400;color:var(--n4)}
+.slot-body{padding:10px 14px;display:flex;align-items:flex-start;gap:10px}
+.slot-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px}
+.si-training{background:var(--pp-l)} .si-task{background:var(--gr-l)} .si-read{background:#FFF0F4} .si-market{background:var(--ye-l)} .si-urgent{background:var(--rd-l)}
+.slot-info{flex:1;min-width:0}
+.slot-name{font-size:13px;font-weight:600;color:var(--n9);line-height:1.3;cursor:pointer}
+.slot-name:hover{color:var(--pp)}
+.slot-desc{font-size:11px;color:var(--n6);margin-top:2px}
+.slot-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.slot-actions{padding:10px 14px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;justify-content:center}
+
+.tag{display:inline-flex;align-items:center;gap:3px;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:600;white-space:nowrap}
+.t-tr{background:var(--pp-l);color:var(--pp)} .t-tk{background:var(--gr-l);color:#0a6b64}
+.t-rd{background:#FFF0F4;color:#9D174D} .t-mk{background:var(--ye-l);color:#7A5500}
+.t-it{background:var(--gr-l);color:#0a6b64} .t-it2{background:var(--ye-l);color:#7A5500}
+.t-fr{background:var(--bl-l);color:#1D5FCC} .t-all{background:var(--pp-l);color:var(--pp)}
+.t-own{background:var(--n2);color:var(--n6)} .t-urg{background:var(--rd-l);color:var(--rd)}
+
+.ssel{border:1.5px solid var(--n2);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;cursor:pointer;outline:none;background:white;font-family:inherit;transition:border-color .1s}
+.ssel.done{background:var(--gr-l);color:#166534;border-color:#86EFAC}
+.ssel.progress{background:var(--bl-l);color:#1e40af;border-color:#93C5FD}
+.ssel.pending{background:var(--n1);color:var(--n6)}
+.ssel.urgent{background:var(--rd-l);color:#991B1B;border-color:#FCA5A5}
+
+.slot-edit-row{display:none;gap:4px;margin-top:4px}
+.slot:hover .slot-edit-row{display:flex}
+.edt-btn{background:var(--n1);border:1px solid var(--n2);border-radius:5px;padding:2px 7px;font-size:10px;cursor:pointer;color:var(--n6);font-family:inherit;transition:all .1s}
+.edt-btn:hover{border-color:var(--pp);color:var(--pp);background:var(--pp-l)}
+.edt-btn.del:hover{border-color:var(--rd);color:var(--rd);background:var(--rd-l)}
+
+.ov-wrap{background:var(--wh);border-radius:11px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.ov-hdr{display:grid;grid-template-columns:40px 1fr 80px 120px 110px 110px;background:var(--n1);border-bottom:1px solid var(--n2)}
+.ov-th{padding:8px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--n6)}
+.ov-row{display:grid;grid-template-columns:40px 1fr 80px 120px 110px 110px;border-bottom:1px solid var(--n1);transition:background .1s;cursor:pointer}
+.ov-row:last-child{border-bottom:none}
+.ov-row:hover{background:var(--n1)}
+.ov-td{padding:9px 12px;font-size:12px;display:flex;align-items:center}
+.ov-num{font-size:10px;font-weight:700;color:var(--n4)}
+.ov-name{font-weight:600;color:var(--n9)}
+
+.ic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.ic{background:var(--wh);border-radius:11px;padding:14px;border:2px solid transparent;position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.ic-it::before{background:var(--gr)} .ic-it2::before{background:var(--ye)} .ic-fr::before{background:var(--bl)}
+.ic-top{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.ic-name{font-size:13px;font-weight:700} .ic-role{font-size:11px;color:var(--n6)}
+.ic-prog-l{display:flex;justify-content:space-between;font-size:10px;color:var(--n6);margin-bottom:2px}
+.ic-prog{height:4px;background:var(--n2);border-radius:2px;overflow:hidden}
+.ic-pf{height:100%;border-radius:2px;transition:width .3s}
+
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;align-items:center;justify-content:center;padding:16px}
+.ov.open{display:flex}
+.modal{background:var(--wh);border-radius:13px;width:100%;max-width:580px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.m-hdr{padding:20px 24px 16px;border-bottom:1px solid var(--n2);position:sticky;top:0;background:var(--wh);z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.m-badge{display:inline-block;margin-bottom:6px;border-radius:5px;padding:2px 8px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.m-title{font-size:16px;font-weight:800;color:var(--n9);line-height:1.3}
+.m-sub{font-size:11px;color:var(--n6);margin-top:3px}
+.m-x{background:var(--n1);border:none;width:27px;height:27px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit}
+.m-x:hover{background:var(--n2)}
+.m-body{padding:20px 24px}
+.m-sec{margin-bottom:20px}.m-sec:last-child{margin-bottom:0}
+.m-sec-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--n4);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.m-sec-title::after{content:'';flex:1;height:1px;background:var(--n2)}
+.m-text{font-size:13px;color:var(--n6);line-height:1.7}
+.m-text strong,.m-text b{color:var(--n9);font-weight:600}
+.m-text ul,.m-text ol{margin:6px 0 6px 16px}
+.m-text li{margin-bottom:4px}
+.m-text a{color:var(--pp);text-decoration:none}
+.m-text a:hover{text-decoration:underline}
+.ritem{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--n1);border-radius:7px;margin-bottom:6px;font-size:12px}
+.ritem:last-child{margin-bottom:0}
+.ri-title{font-weight:600;color:var(--n9)}
+.ri-desc{color:var(--n6);margin-top:1px;font-size:11px}
+.ri-link{color:var(--pp);font-size:10px;text-decoration:none;display:inline-block;margin-top:2px}
+.ri-link:hover{text-decoration:underline}
+.titem{display:flex;align-items:flex-start;gap:9px;padding:9px 12px;background:var(--gr-l);border-radius:7px;border-left:3px solid var(--gr);margin-bottom:6px;font-size:12px}
+.ti-desc{color:var(--n6);margin-top:1px;font-size:11px}
+.tip{background:var(--pp-l);border-radius:7px;padding:10px 12px;font-size:12px;color:var(--pp);border-left:3px solid var(--pp);line-height:1.6;margin-top:8px}
+.tip strong{font-weight:700;color:var(--pp-d)}
+.m-ftr{padding:12px 24px;border-top:1px solid var(--n2);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:var(--wh)}
+.btn-sec{border:1.5px solid var(--n2);background:var(--wh);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;color:var(--n6);font-family:inherit}
+.btn-sec:hover{border-color:var(--n4)}
+.btn-pri{background:var(--pp);color:#fff;border:none;border-radius:7px;padding:6px 18px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-pri:hover{background:var(--pp-d)}
+.btn-warn{background:var(--rd);color:#fff;border:none;border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+
+.f-group{margin-bottom:12px}
+.f-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--n6);margin-bottom:4px;display:block}
+.f-in{width:100%;border:1.5px solid var(--n2);border-radius:7px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;color:var(--n9);transition:border-color .1s}
+.f-in:focus{border-color:var(--pp)}
+textarea.f-in{resize:vertical;min-height:80px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cb-it{display:flex;align-items:center;gap:5px;padding:5px 9px;border:1.5px solid var(--n2);border-radius:6px;font-size:11px;cursor:pointer;transition:all .1s}
+.cb-it:hover{border-color:var(--pp);background:var(--pp-l)}
+.cb-it input{accent-color:var(--pp)}
+
+.add-row{display:flex;justify-content:flex-end;margin-bottom:16px;gap:8px}
+.add-btn{background:var(--pp);color:#fff;border:none;border-radius:18px 7px 7px 7px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px}
+.add-btn:hover{background:var(--pp-d)}
+.add-btn.sec{background:var(--wh);color:var(--n6);border:1.5px solid var(--n2);border-radius:7px}
+.add-btn.sec:hover{border-color:var(--pp);color:var(--pp)}
+
+.mtb{display:none}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .sb{display:none}
+  .ic-grid{grid-template-columns:1fr}
+  .ov-header,.ov-row{grid-template-columns:1fr 70px 1fr 80px}
+  .mtb{display:block;background:var(--wh);border-bottom:1px solid var(--n2);position:sticky;top:52px;z-index:250;padding:10px 12px}
+  .mtb-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+  .mtb-row:not(:last-child){margin-bottom:8px}
+  .mtb-btn{flex-shrink:0;border:1.5px solid var(--n2);background:var(--wh);border-radius:16px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--n6);cursor:pointer;font-family:inherit;white-space:nowrap;display:flex;align-items:center;gap:5px}
+  .mtb-btn.on{background:var(--pp);border-color:var(--pp);color:#fff}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-l">
+    <div class="hdr-logo">
+      <svg viewBox="0 0 302 302" fill="none"><path d="M161.5 57c-33 0-60 25.6-62.2 58.5v116.3c0 7.3 5.8 13.1 13.1 13.1s13.1-5.8 13.1-13.1V120c0-20.5 16.9-36.7 36.7-36.7s36.7 16.9 36.7 36.7-16.9 36.5-36.7 36.5c-7.3 0-13.1 5.8-13.1 13.1s5.8 13.1 13.1 13.1c33.6 0 62.9-28.5 62.9-62.9C225.1 85.4 195.1 57 161.5 57z" fill="white"/></svg>
+    </div>
+    <span class="hdr-title">Intern Onboarding</span>
+    <span class="hdr-sub">| Off-Page Team · Oscar</span>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <span class="hdr-pill">🇪🇸 🇫🇷</span>
+    <span class="hdr-pill" id="hdr-date"></span>
+  </div>
+</header>
+
+<div class="mtb">
+  <div class="mtb-row" id="mtb-intern">
+    <button class="mtb-btn on" data-v="all" onclick="setIntern('all')">∀ All</button>
+    <button class="mtb-btn" data-v="IT2" onclick="setIntern('IT2')">🇪🇸 Martina</button>
+    <button class="mtb-btn" data-v="FR" onclick="setIntern('FR')">🇫🇷 Matthias</button>
+  </div>
+  <div class="mtb-row" id="mtb-week">
+    <button class="mtb-btn on" data-v="W1" onclick="setWeek('W1')">📅 Week 1</button>
+    <button class="mtb-btn" data-v="W2" onclick="setWeek('W2')">🚀 Week 2</button>
+    <button class="mtb-btn" data-v="TBD" onclick="setWeek('TBD')">⏳ Backlog</button>
+  </div>
+  <div class="mtb-row" id="mtb-view">
+    <button class="mtb-btn on" data-v="plan" onclick="setView('plan')">📋 Plan</button>
+    <button class="mtb-btn" data-v="cal" onclick="setView('cal')">🗓 Calendar</button>
+    <button class="mtb-btn" data-v="all" onclick="setView('all')">📊 All</button>
+    <button class="mtb-btn" data-v="interns" onclick="setView('interns')">👥 Interns</button>
+  </div>
+</div>
+
+<div class="layout">
+<aside class="sb">
+  <div class="sb-sec">
+    <div class="sb-lbl">Filter by intern</div>
+    <div class="sb-item on" id="sbi-all" onclick="setIntern('all')">
+      <div class="sb-av av-all">∀</div>
+      <div style="flex:1">All interns<div class="sb-prog"><div class="sb-pf pf-all" id="p-all" style="width:0%"></div></div></div>
+    </div>
+    <div class="sb-item" id="sbi-IT2" onclick="setIntern('IT2')">
+      <div class="sb-av av-it2">MA</div>
+      <div style="flex:1">Martina 🇪🇸<div class="sb-prog"><div class="sb-pf pf-it2" id="p-it2" style="width:0%"></div></div></div>
+    </div>
+    <div class="sb-item" id="sbi-FR" onclick="setIntern('FR')">
+      <div class="sb-av av-fr">MH</div>
+      <div style="flex:1">Matthias 🇫🇷 ⚡<div class="sb-prog"><div class="sb-pf pf-fr" id="p-fr" style="width:0%"></div></div></div>
+    </div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Phase</div>
+    <div class="sb-item on" id="sbw-W1" onclick="setWeek('W1')">
+      <span>📅</span><div><div style="font-weight:600;color:var(--n9);font-size:12px">Week 1</div><div style="font-size:10px;color:var(--n6)">Day 1–5 · Foundations</div></div>
+    </div>
+    <div class="sb-item" id="sbw-W2" onclick="setWeek('W2')">
+      <span>🚀</span><div><div style="font-weight:600;color:var(--n9);font-size:12px">Week 2</div><div style="font-size:10px;color:var(--n6)">Day 6–10 · Live ops</div></div>
+    </div>
+    <div class="sb-item" id="sbw-TBD" onclick="setWeek('TBD')">
+      <span>⏳</span><div><div style="font-weight:600;color:var(--n9);font-size:12px">Backlog</div><div style="font-size:10px;color:var(--n6)">PR ES · To schedule</div></div>
+    </div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-sec">
+    <div class="sb-lbl">View</div>
+    <div class="sb-item on" id="sbv-plan" onclick="setView('plan')"><span>📋</span> Weekly plan</div>
+    <div class="sb-item" id="sbv-cal" onclick="setView('cal')"><span>🗓</span> Calendar</div>
+    <div class="sb-item" id="sbv-all" onclick="setView('all')"><span>📊</span> All trainings</div>
+    <div class="sb-item" id="sbv-interns" onclick="setView('interns')"><span>👥</span> Interns</div>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="view on" id="v-plan">
+    <div class="add-row"><button class="add-btn sec" onclick="openAdd()">+ Add slot</button></div>
+    <div id="plan-content"></div>
+  </div>
+  <div class="view" id="v-cal"><div id="cal-content"></div></div>
+  <div class="view" id="v-all">
+    <div class="add-row"><button class="add-btn sec" onclick="openAdd()">+ Add slot</button></div>
+    <div id="all-content"></div>
+  </div>
+  <div class="view" id="v-interns">
+    <div class="ic-grid" id="interns-content"></div>
+    <div class="notice n-warn"><span>⚡</span><div><b>Matthias — flexible start date.</b> HR hasn't confirmed his exact start day. Use Day 1, Day 2... relative scheduling — shift the whole plan once his real start date is known. PRVG + TRVE deadline is 2 weeks after Day 1.</div></div>
+    <div class="notice n-info" style="margin-top:8px"><span>ℹ️</span><div><b>Martina — Spain only now.</b> Italy market closed. She starts with Whale ES (full process) this week before Eleonora leaves Friday. PR ES (Calendar models) comes later — Oscar trains her directly, no handover from anyone else.</div></div>
+    <div class="notice n-ok" style="margin-top:8px"><span>✅</span><div><b>Oscar runs 100% of onboarding now.</b> Eleonora leaves Friday, Aya is no longer on the team. All sessions are owned by Oscar.</div></div>
+  </div>
+</main>
+</div>
+
+<div class="ov" id="ov-detail" onclick="closeOvClick(event,'ov-detail')">
+  <div class="modal">
+    <div class="m-hdr">
+      <div>
+        <div class="m-badge t-tr" id="d-badge">TRAINING</div>
+        <div class="m-title" id="d-title">—</div>
+        <div class="m-sub" id="d-sub">—</div>
+      </div>
+      <button class="m-x" onclick="closeOv('ov-detail')">✕</button>
+    </div>
+    <div class="m-body" id="d-body"></div>
+    <div class="m-ftr">
+      <div style="flex:1;font-size:12px;color:var(--n6)">Owner: <span id="d-owner" style="font-weight:600;color:var(--n9)">—</span></div>
+      <button class="btn-sec" onclick="closeOv('ov-detail')">Close</button>
+      <button class="btn-pri" onclick="openEditFromDetail()">Edit slot</button>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="ov-add" onclick="closeOvClick(event,'ov-add')">
+  <div class="modal">
+    <div class="m-hdr">
+      <div><div class="m-title" id="add-title">New slot</div><div class="m-sub">Add or edit a training, task or reading</div></div>
+      <button class="m-x" onclick="closeOv('ov-add')">✕</button>
+    </div>
+    <div class="m-body">
+      <div class="f-group"><label class="f-lbl">Name</label><input type="text" class="f-in" id="f-name" placeholder="Training or task name"></div>
+      <div class="f-group"><label class="f-lbl">Short description</label><input type="text" class="f-in" id="f-short" placeholder="One-line description"></div>
+      <div class="f-row">
+        <div class="f-group"><label class="f-lbl">Phase</label>
+          <select class="f-in" id="f-week">
+            <option value="W1">Week 1 (Day 1–5)</option>
+            <option value="W2">Week 2 (Day 6–10)</option>
+            <option value="TBD">Backlog / TBD</option>
+          </select></div>
+        <div class="f-group"><label class="f-lbl">Day</label>
+          <select class="f-in" id="f-day">
+            <option value="D1">Day 1</option><option value="D2">Day 2</option>
+            <option value="D3">Day 3</option><option value="D4">Day 4</option><option value="D5">Day 5</option>
+          </select></div>
+      </div>
+      <div class="f-row">
+        <div class="f-group"><label class="f-lbl">Start time</label><input type="text" class="f-in" id="f-time" placeholder="09:00"></div>
+        <div class="f-group"><label class="f-lbl">Duration (min)</label><input type="number" class="f-in" id="f-dur" placeholder="60" min="15" max="240"></div>
+      </div>
+      <div class="f-row">
+        <div class="f-group"><label class="f-lbl">Type</label>
+          <select class="f-in" id="f-type">
+            <option value="training">Training</option><option value="task">Task / Practice</option>
+            <option value="read">Reading</option><option value="market">Market-specific</option>
+          </select></div>
+        <div class="f-group"><label class="f-lbl">Owner</label><input type="text" class="f-in" id="f-owner" placeholder="Oscar" value="Oscar"></div>
+      </div>
+      <div class="f-group"><label class="f-lbl">Assigned to</label>
+        <div class="cb-grid">
+          <label class="cb-it"><input type="checkbox" id="f-it2"> 🇪🇸 Martina</label>
+          <label class="cb-it"><input type="checkbox" id="f-fr"> 🇫🇷 Matthias</label>
+        </div></div>
+      <div class="f-group"><label class="f-lbl">Training guide</label><textarea class="f-in" id="f-guide" placeholder="What to cover..."></textarea></div>
+      <div class="f-group"><label class="f-lbl">Readings (label | url per line)</label><textarea class="f-in" id="f-reads" placeholder="papernest Studies ES | https://www.papernest.es/estudios/"></textarea></div>
+      <div class="f-group"><label class="f-lbl">Deliverable / practice task</label><textarea class="f-in" id="f-task" placeholder="What should they produce?"></textarea></div>
+    </div>
+    <div class="m-ftr">
+      <button class="btn-warn" id="del-btn" onclick="deleteSlot()" style="display:none;margin-right:auto">Delete</button>
+      <button class="btn-sec" onclick="closeOv('ov-add')">Cancel</button>
+      <button class="btn-pri" onclick="saveSlot()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const INTERNS = [
+  {id:'IT2',name:'Martina',  initials:'MA',av:'av-it2',market:'🇪🇸 Spain (full)',ch:'Whale → PR',from:'Day 1',to:'TBD',cls:'ic-it2',pf:'pf-it2',note:'Italy market closed — Spain full ownership. Starts with Whale, PR comes later.'},
+  {id:'FR', name:'Matthias', initials:'MH',av:'av-fr', market:'🇫🇷 France',     ch:'PR + Link Exchange',from:'Day 1',to:'TBD',cls:'ic-fr', pf:'pf-fr', note:'⚡ Start date not confirmed by HR. Plan is day-relative — shift freely. PRVG+TRVE due Day 10–12.'}
+];
+
+const DAY_NAMES = {D1:'Day 1',D2:'Day 2',D3:'Day 3',D4:'Day 4',D5:'Day 5'};
+const DAY_DATES = {
+  W1:{D1:'Mon — wk1',D2:'Tue — wk1',D3:'Wed — wk1',D4:'Thu — wk1',D5:'Fri — wk1'},
+  W2:{D1:'Mon — wk2',D2:'Tue — wk2',D3:'Wed — wk2',D4:'Thu — wk2',D5:'Fri — wk2'},
+  TBD:{D1:'TBD',D2:'TBD',D3:'TBD',D4:'TBD',D5:'TBD'}
+};
+
+let SLOTS = [
+// ══════════════════════════════════════════════════════
+// WEEK 1 — DAY 1
+// ══════════════════════════════════════════════════════
+{id:'shr01',wk:'W1',day:'D1',time:'09:00',dur:90,type:'task',
+ name:'HR onboarding: company values, policies, paperwork',
+ short:'Company-wide HR onboarding — values, policies, tools access, contract paperwork. Run by HR, not Oscar.',
+ who:['IT2','FR'],status:'pending',owner:'HR',
+ guide:`<b>Goal:</b> Standard company onboarding before any team-specific training starts. This block depends on HR's own schedule and may need to be moved depending on availability — keep it flexible.<br><br>
+<b>Typically covers:</b><ul>
+<li>Company values and culture</li>
+<li>Contract paperwork and admin formalities</li>
+<li>Tools and accounts setup (email, Slack, calendar, HR platform)</li>
+<li>Office logistics if relevant (badge, equipment, remote policy)</li>
+<li>Code of conduct and internal policies</li>
+</ul>
+<div class="tip"><strong>Oscar's note:</strong> This session is owned by HR, not by Oscar. Team-specific Off-Page training (Welcome and team vision, etc.) starts right after this block finishes. If HR pushes this later in the day or to Day 2, shift the rest of Day 1 accordingly — do not double-book.</div>`,
+ reads:[],task:''},
+
+{id:'s01',wk:'W1',day:'D1',time:'10:45',dur:45,type:'training',
+ name:'Welcome and team vision',
+ short:'What the Off-Page team does, how it ties to SEO, KPIs, team structure',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Before touching any tool, they need to understand why the team exists and what success looks like.<br><br>
+<b>Cover:</b><ul>
+<li>What Digital PR does vs traditional PR (editorial links vs press coverage)</li>
+<li>How Off-Page contributes to SEO: backlinks to domain authority to organic ranking to traffic to revenue</li>
+<li>KPIs we track: new backlinks, unique referring domains, avg DR of linking sites, media coverage, outreach reply rate</li>
+<li>Team structure: it's just Oscar now managing both interns directly — no other intermediaries</li>
+<li>Two main channels: <b>PR</b> (studies + journalist outreach) and <b>Whale</b> (article distribution via YAMM) / <b>Link Exchange</b> (FR only)</li>
+<li>Tools they will use: Ahrefs, Salesforce, Instantly, YAMM, Sheets/Excel, Lusha/Hunter, ChatGPT</li>
+</ul>`,
+ reads:[],task:''},
+
+{id:'s02',wk:'W1',day:'D1',time:'11:30',dur:45,type:'training',
+ name:'Off-Page Dictionary',
+ short:'Full glossary: backlink, DR, follow/nofollow, anchor text, embargo, Whale, batch',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Speak the same language from day 1.<br><br>
+<b>Key terms:</b><ul>
+<li><b>Backlink / inbound link:</b> link from an external domain pointing to papernest</li>
+<li><b>DR (Domain Rating):</b> Ahrefs authority score 0–100</li>
+<li><b>Follow / Nofollow:</b> whether the link passes SEO authority or not</li>
+<li><b>Anchor text:</b> the visible clickable text of a link</li>
+<li><b>Link equity:</b> SEO value passed through a link</li>
+<li><b>Outreach:</b> contacting journalists or sites to earn coverage or links</li>
+<li><b>Embargo:</b> agreement not to publish until a set date</li>
+<li><b>Exclusive:</b> giving one outlet the story before everyone else</li>
+<li><b>Batch:</b> a set of emails sent in one campaign</li>
+<li><b>Whale:</b> papernest's mass link-building system via energy articles + YAMM</li>
+<li><b>Deep link:</b> link to an internal page, not the homepage</li>
+</ul>`,
+ reads:[{icon:'📖',title:'Off-Page Dictionary (Notion)',desc:'Read fully before Day 2',url:'https://www.notion.so/papernest/'}],
+ task:''},
+
+{id:'s03',wk:'W1',day:'D1',time:'12:15',dur:30,type:'read',
+ name:'Reading: papernest published studies',
+ short:'Review 2–3 studies at papernest.es/estudios — understand the format before producing one',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> See what the team actually produces. Before learning to make a study, understand what makes one newsworthy.<br><br>
+<b>Instructions:</b><ul>
+<li>Read at least 2 studies from papernest.es/estudios paying attention to the journalistic angle, not the raw data</li>
+<li>For each study, identify: What is the main headline? What single data point supports it? Why is it news?</li>
+<li>Notice the structure: data, analysis, context, actionable conclusion</li>
+</ul>`,
+ reads:[{icon:'🔗',title:'papernest Studies (Spain)',desc:'Read 2–3 fully. Focus on angle and headline, not raw numbers.',url:'https://www.papernest.es/estudios/'}],
+ task:''},
+
+{id:'s04',wk:'W1',day:'D1',time:'14:00',dur:75,type:'training',
+ name:'Data storytelling: from data to news',
+ short:'Journalistic angle, insight vs data point, building headlines that land',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> The most important skill in the team. Without this, reports are spreadsheets, not news.<br><br>
+<b>Cover:</b><ul>
+<li><b>Data point vs insight:</b><br>
+  Data: "Madrid averages 450 kWh/month"<br>
+  Insight: "Madrid consumes 45% more electricity than Barcelona, triple the EU average"</li>
+<li><b>How to find the journalistic angle:</b>
+  <ul>
+    <li>Look for contrast (highest vs lowest, before vs after, city vs city)</li>
+    <li>Look for surprise (what the reader did not expect)</li>
+    <li>Look for personal impact (who does this affect, how much?)</li>
+  </ul>
+</li>
+<li><b>What makes a headline work:</b> specific number plus context plus relevance to the reader</li>
+<li><b>The journalist test:</b> Would a journalist publish this without talking to us? If not, it is not strong enough.</li>
+</ul>
+<div class="tip"><strong>Live exercise:</strong> Give them 2–3 raw datasets. Each person has 10 min to write one news headline. Compare and discuss why one works better.</div>`,
+ reads:[],
+ task:'Exercise: 3 datasets to 1 headline per person. Oscar provides the data, done live at the end of the session.'},
+
+{id:'s05',wk:'W1',day:'D1',time:'15:30',dur:30,type:'training',
+ name:'Organisation and internal comms',
+ short:'Notion structure, Slack etiquette, how to report to Oscar',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Cover:</b><ul>
+<li>Notion structure: what lives where</li>
+<li>Slack: concise messages, with data (%, numbers), direct. Format: what you did plus numbers plus blockers</li>
+<li>When to ask Oscar vs use Notion / ChatGPT / Google first</li>
+<li>Weekly report format (Friday message): sent, received, coverage, blockers, next week plan</li>
+</ul>`,
+ reads:[{icon:'📖',title:'Work Organization (Notion)',url:'https://www.notion.so/papernest/Work-Organization-2111fb6f60ef80e697e1cb72803c524e'}],
+ task:''},
+
+// MARTINA ONLY — WHALE FAST TRACK (before Eleonora leaves Friday)
+{id:'sw01',wk:'W1',day:'D1',time:'16:15',dur:75,type:'market',
+ name:'🇪🇸 The Whale — full process walkthrough (Martina)',
+ short:'Brainstorm, brief, copywriter, YAMM send, reporting. Full loop in one session — urgent before Friday.',
+ who:['IT2'],status:'urgent',owner:'Oscar',
+ guide:`<b>⚡ Priority session — must happen before Friday when Eleonora leaves.</b><br><br>
+<b>Goal:</b> Martina needs the complete Whale process end to end this week, since there will be no handover support after Friday.<br><br>
+<b>Full Whale process:</b>
+<ol style="margin:0 0 8px 16px">
+<li><b>Brainstorm topics:</b> energy themes ES publishers want — seasonal trends, regulatory news, consumer tips</li>
+<li><b>Write brief for copywriter:</b> topic, angle, target keywords, length, format notes</li>
+<li><b>Review the article:</b> informative, not branded, natural keywords, readable</li>
+<li><b>Prepare sending list:</b> active ES publisher DB, filter active contacts</li>
+<li><b>Send via YAMM:</b> connect Sheets to Gmail to YAMM, basic personalisation, check tracking pixel</li>
+<li><b>Follow up:</b> review acceptances, coordinate publication with the publisher</li>
+<li><b>Reporting:</b> update Whale Reporting tab in the Growth SEO Dashboard</li>
+</ol>
+<b>Current volume:</b> Spain runs 4–5 articles/week. Martina takes over fully from next week.<br><br>
+<div class="tip"><strong>Oscar's note:</strong> Do this as a live walkthrough on real, current ES data — not a dummy example. Martina should be able to run next week's send solo.</div>`,
+ reads:[{icon:'📖',title:'The Whale (Notion)',url:'https://www.notion.so/papernest/The-Whale-Email-Marketing-8351b9bfc0ed4d849d5133d39612a5bf'}],
+ task:'Martina takes notes on every step live. No separate practice yet — this session IS the practice.'},
+
+// WEEK 1 — DAY 2
+{id:'s10',wk:'W1',day:'D2',time:'09:00',dur:60,type:'training',
+ name:'Full campaign flow: idea to published link',
+ short:'Every step from brainstorm to reporting, understanding how it all connects',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Understand that no step exists in isolation. Each feeds the next.<br><br>
+<b>The full flow:</b>
+<ol style="margin:0 0 8px 16px">
+<li><b>Idea</b> — team brainstorm, regulatory calendar, seasonal trends</li>
+<li><b>Research</b> — what data exists, what sources, what competitors have published</li>
+<li><b>Data</b> — Excel/Sheets model, cleaning, calculations</li>
+<li><b>Analysis</b> — find the angle (data storytelling)</li>
+<li><b>Report</b> — document with data, charts, methodology</li>
+<li><b>Press release</b> — adapted by market and language</li>
+<li><b>Journalist list</b> — segmented by vertical and market</li>
+<li><b>Outreach</b> — Instantly (direct PR) or YAMM (Whale publishers)</li>
+<li><b>Coverage</b> — monitor publications, check indexation, track links earned</li>
+<li><b>Reporting</b> — update Growth SEO Dashboard, monthly Ahrefs report</li>
+</ol>
+<div class="tip"><strong>Key point:</strong> The report does not exist for its own sake. It exists to generate coverage and backlinks.</div>`,
+ reads:[{icon:'📖',title:'Energy Report process (Notion)',url:'https://www.notion.so/papernest/Energy-Report-20f1fb6f60ef80fd93d1dbee7db5236a'}],
+ task:''},
+
+{id:'s11',wk:'W1',day:'D2',time:'10:15',dur:75,type:'training',
+ name:'Ahrefs: setup and operational use',
+ short:'Site Explorer, Content Explorer, KPIs, alerts, Google operators for PR',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Cover:</b><ul>
+<li>Set up account and add papernest domains (ES, FR)</li>
+<li><b>Site Explorer:</b> current backlinks, new referring domains, anchor text used</li>
+<li><b>Content Explorer:</b> find articles published about energy in last 30 days to identify active journalists on the topic</li>
+<li><b>KPIs we track:</b> new backlinks (weekly/monthly), unique domains, DR of linking sites</li>
+<li><b>Set up alerts:</b> new papernest mentions, new backlinks</li>
+<li><b>Google operators for PR:</b><br>
+  <code>site:lemonde.fr "energie" after:2025-01-01</code><br>
+  <code>site:elpais.com "factura luz" inurl:economia</code></li>
+</ul>`,
+ reads:[{icon:'📖',title:'Ahrefs Training (Notion)',url:'https://www.notion.so/papernest/Tools-6a0b6522b00b40019a9cf4e64e0f7f21'}],
+ task:'Set up Ahrefs account, add assigned market domain. Bring 3 backlink insights to Day 3.'},
+
+{id:'s12',wk:'W1',day:'D2',time:'14:00',dur:60,type:'training',
+ name:'How to find journalists (DB and Lusha)',
+ short:'Content Explorer, Google News, Lusha, editorial emails, Journalist DB',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Standard process:</b>
+<ol style="margin:0 0 8px 16px">
+<li><b>Find the journalist:</b> Ahrefs Content Explorer (topic plus country) or Google News (last 24h on energy)</li>
+<li><b>Verify they cover the topic:</b> check their last 5 articles first</li>
+<li><b>Get the email:</b>
+  <ul>
+    <li>Named author — Lusha (Chrome extension) or direct Google search</li>
+    <li>No author — editorial email (redaccion@, economia@, energia@)</li>
+  </ul>
+</li>
+<li><b>Add to Journalist DB:</b> name, email, outlet, outlet DR, vertical, market, last contacted</li>
+</ol>
+<div class="tip"><strong>Rule:</strong> Never add a journalist without a verified email. A bounced email degrades the sending domain.</div>`,
+ reads:[{icon:'📖',title:'How to Find Journalists (Notion)',url:'https://www.notion.so/papernest/How-to-find-Journalists-for-PR-2e71fb6f60ef80809076ec281c56113e'}],
+ task:'Find 10 journalists for assigned market with verified emails. Add to DB with all fields.'},
+
+{id:'s13',wk:'W1',day:'D2',time:'15:30',dur:30,type:'read',
+ name:'Reading: Digital PR and SEO reference',
+ short:'External references on Digital PR and link building',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:'Read before end of week.',
+ reads:[
+   {icon:'🔗',title:'Ahrefs: Digital PR for SEO',desc:'What Digital PR is from an SEO lens, real case studies',url:'https://ahrefs.com/blog/digital-pr/'},
+   {icon:'🔗',title:'Google: Link spam policies',desc:'Understanding what Google considers link manipulation',url:'https://developers.google.com/search/docs/essentials/spam-policies#link-spam'}
+ ],task:''},
+
+// MARTINA ONLY — WHALE PRACTICE
+{id:'sw02',wk:'W1',day:'D2',time:'09:00',dur:90,type:'task',
+ name:'🇪🇸 TASK: Write Whale article with GPT (Martina)',
+ short:'First real article: pick a topic, use GPT process, review, share for feedback',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> First real deliverable, a Whale article ready to send to the copywriter or publish directly.<br><br>
+<b>Process:</b>
+<ol style="margin:0 0 8px 16px">
+<li>Pick an ES energy topic from the brainstorm list covered yesterday</li>
+<li>Use the documented GPT prompt for the Whale</li>
+<li>Review and edit the output, never accept first draft without reading</li>
+<li>Add real data if available, never invent figures</li>
+<li>Share with Oscar for feedback</li>
+</ol>`,
+ reads:[{icon:'📖',title:'Writing an Off-Page Article with GPT (Notion)',url:'https://www.notion.so/papernest/Writing-an-Off-Page-Article-with-GPT-2f81fb6f60ef8093b280d6790607c77f'}],
+ task:'One Whale article in Spanish, ready for review by end of day.'},
+
+// WEEK 1 — DAY 3
+{id:'s20',wk:'W1',day:'D3',time:'09:00',dur:90,type:'training',
+ name:'Outreach: the full block',
+ short:'Embargo, exclusive, timing, personalisation, follow-up rules, media classification',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Write an outreach email that has a real chance of a reply.<br><br>
+<b>Cover:</b><ul>
+<li><b>Anatomy of a good outreach email:</b>
+  <ul>
+    <li>Subject: concrete number plus hook. Example: "French households will pay €340 more on energy bills this winter"</li>
+    <li>Body: max 3–4 sentences. Headline plus key data plus offer (full report or exclusive)</li>
+    <li>Clear CTA: what do you want the journalist to do?</li>
+  </ul>
+</li>
+<li><b>Embargo:</b> agreement not to publish until date X</li>
+<li><b>Exclusive:</b> one outlet first, higher publication rate, lower initial reach</li>
+<li><b>Timing:</b> Tuesday and Wednesday mornings have the highest open rates</li>
+<li><b>Personalisation:</b> mention their last article on the topic, one sentence is enough but it must be real</li>
+<li><b>Follow-up:</b> one follow-up only, 3–4 days later, short. Then stop.</li>
+<li><b>Media classification:</b> national / regional / economy / consumer / energy / lifestyle, match story to outlet</li>
+</ul>`,
+ reads:[{icon:'📖',title:'PR Strategy (Notion)',url:'https://www.notion.so/papernest/PR-Strategy-1c81fb6f60ef806ead0ed97e0f43eeca'}],
+ task:''},
+
+{id:'s21',wk:'W1',day:'D3',time:'11:00',dur:60,type:'training',
+ name:'YAMM plus Instantly: sending tools',
+ short:'Two tools, two purposes: Whale publishers (YAMM) vs direct PR outreach (Instantly)',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>They are not interchangeable:</b><br><br>
+<b>YAMM:</b> mass campaigns to Whale publishers, lists of 200–500 recipients, integrates with Gmail and Sheets, tracks opens and clicks.<br><br>
+<b>Instantly:</b> direct PR outreach, smaller lists (20–80), highly personalised, sequence management with automatic follow-up, replies/bounces/unsubscribes dashboard.`,
+ reads:[{icon:'📖',title:'YAMM and Instantly (Notion)'}],
+ task:'Send a test email to yourself in both tools. Verify tracking is working.'},
+
+{id:'s22',wk:'W1',day:'D3',time:'14:00',dur:60,type:'training',
+ name:'AI for PR work',
+ short:'When to use AI, when not to, practical prompts',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Use AI as an accelerator, not a replacement for judgment.<br><br>
+<b>When to USE AI:</b> draft press releases, suggest journalistic angles, generate spreadsheet formulas, personalise outreach at scale, summarise long articles, translate content, campaign brainstorming.<br><br>
+<b>When NOT to use AI:</b> extract complete datasets, verify current prices, decide which journalists to contact, judge whether a data point is news.<br><br>
+<div class="tip"><strong>Golden rule:</strong> If AI gives you a specific number, always verify against the primary source before including it in any document.</div>`,
+ reads:[{icon:'📖',title:'AI Training (Notion)',url:'https://www.notion.so/papernest/AI-Training-How-to-Use-ChatGPT-2111fb6f60ef802a88e3e22d2ca9144f'}],
+ task:''},
+
+{id:'s23',wk:'W1',day:'D3',time:'15:30',dur:90,type:'task',
+ name:'TASK: Build journalist list, 20 verified contacts',
+ short:'First real deliverable, used in Week 2 campaigns',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Deliverable IT2 (Martina):</b> 20 Spanish journalists covering energy / consumer / economy.<br><br>
+<b>Deliverable FR (Matthias):</b> 20 French journalists covering energy / economy, prioritise those who have covered TRV or gas prices before.<br><br>
+Columns: Name / Email / Outlet / Outlet DR / Vertical / Last relevant article.`,
+ reads:[],
+ task:'Google Sheet shared with Oscar by end of Day 3. Oscar reviews Day 4 morning.'},
+
+// MATTHIAS ONLY — FR MARKET (flexible, no fixed day)
+{id:'sf01',wk:'W1',day:'D3',time:'09:00',dur:90,type:'market',
+ name:'🇫🇷 Energy Market France plus PRVG/TRVE models (Matthias)',
+ short:'TRV, PRVG, CRE, FR media, plus hands-on with the Excel models. Run by Oscar.',
+ who:['FR'],status:'urgent',owner:'Oscar',
+ guide:`<b>⚡ The most critical training for Matthias. Run entirely by Oscar.</b><br><br>
+<b>French energy market:</b><ul>
+<li><b>TRV (Tarif Réglementé de Vente):</b> regulated electricity tariff, equivalent to Spain's PVPC</li>
+<li><b>PRVG (Prix Réglementé du Gaz):</b> regulated gas price, published quarterly by CRE</li>
+<li><b>CRE:</b> the regulator, publishes new prices on a fixed quarterly schedule</li>
+<li><b>Main FR media:</b> Les Echos, Le Figaro Économie, BFM Business, Capital, 60 Millions de Consommateurs, Le Monde</li>
+</ul>
+<b>PRVG + TRVE Excel models, hands-on:</b><ul>
+<li>Walk through the model structure with Oscar</li>
+<li>Understand which cells are data inputs vs calculated outputs</li>
+<li>Practice the update flow with dummy data: update inputs, verify calculations, extract KPIs for press release</li>
+<li>Know what the output numbers mean for the press release</li>
+</ul>
+<div class="tip" style="background:var(--rd-l);border-left-color:var(--rd);color:var(--rd)"><strong>⚡ Deadline:</strong> Publication target is Day 10–12 (roughly 2 weeks from Day 1, whenever Matthias actually starts). CRE publishes, update model, validate with Oscar, send press kit with embargo confirmed.</div>`,
+ reads:[],
+ task:'Practice update flow with dummy data. Must be autonomous on the models within the first week.'},
+
+{id:'sf02',wk:'W1',day:'D3',time:'14:00',dur:90,type:'market',
+ name:'🇫🇷 Link Exchange France: full process (Matthias)',
+ short:'Outreach tab, Active Deals, Live Links, Apps Script automation',
+ who:['FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Link Exchange vs PR, key difference:</b><br>
+PR earns a link because a journalist publishes our story (editorial link). Link Exchange is a reciprocal agreement between sites to exchange links (commercial link).<br><br>
+<b>Process:</b>
+<ol style="margin:0 0 8px 16px">
+<li><b>Prospecting:</b> energy / finance / consumer sites in FR with relevant DR</li>
+<li><b>Outreach tab:</b> manage contacts in the Link Exchange Sheets tracker</li>
+<li><b>Active Deals:</b> deals in negotiation</li>
+<li><b>Live Links:</b> published links, verify monthly they are still active and follow</li>
+<li><b>Apps Script automation:</b> automatic follow-up alerts</li>
+</ol>`,
+ reads:[{icon:'📖',title:'Link Exchange (Notion)',url:'https://www.notion.so/papernest/Link-Exchange-1ac1fb6f60ef80dd93e0c6ec160ee055'}],
+ task:''},
+
+// WEEK 1 — DAY 4
+{id:'s30',wk:'W1',day:'D4',time:'09:00',dur:60,type:'training',
+ name:'Excel and Google Sheets advanced',
+ short:'XLOOKUP, INDEX MATCH, UNIQUE, QUERY, pivot tables, conditional formatting',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Cover:</b><ul>
+<li><b>XLOOKUP / VLOOKUP:</b> cross-reference data between tables</li>
+<li><b>INDEX + MATCH:</b> more flexible for bidirectional lookups</li>
+<li><b>UNIQUE + COUNTIF:</b> deduplicate email lists, count frequencies</li>
+<li><b>QUERY (Sheets):</b> filter and transform data like SQL</li>
+<li><b>Pivot tables:</b> summarise by category, market, month</li>
+<li><b>Conditional formatting:</b> highlight bounces, high DR, past dates</li>
+<li><b>Data cleaning:</b> TRIM, CLEAN, remove duplicates, split columns</li>
+</ul>
+<div class="tip"><strong>Tip:</strong> When stuck on a formula, ask ChatGPT with exact context. Always verify the output makes sense.</div>`,
+ reads:[],
+ task:'Live exercise: 3 Sheets challenges with real PR data, 30 min solo, then compare solutions.'},
+
+{id:'s31',wk:'W1',day:'D4',time:'10:15',dur:45,type:'training',
+ name:'How to write a data report',
+ short:'7-step process: hypothesis, extraction, cleaning, analysis, charts, conclusions, press release',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>The 7 steps:</b>
+<ol style="margin:0 0 8px 16px">
+<li><b>Hypothesis:</b> what do we want to show?</li>
+<li><b>Data extraction:</b> sources (OMIE, CNMC, CRE, Eurostat, INE)</li>
+<li><b>Cleaning:</b> remove duplicates, standardise formats, verify ranges</li>
+<li><b>Analysis:</b> comparisons, percentage changes, rankings, correlations</li>
+<li><b>Charts:</b> choose correctly, bars for comparison, lines for time series</li>
+<li><b>Conclusions:</b> 3–5 key findings written as news headlines</li>
+<li><b>Press release:</b> with methodology section included</li>
+</ol>
+<div class="tip"><strong>Quality check:</strong> A good report is one where the top 3 findings can each become a headline for 3 different outlets.</div>`,
+ reads:[{icon:'📖',title:'Energy Report (Notion)',url:'https://www.notion.so/papernest/Energy-Report-20f1fb6f60ef80fd93d1dbee7db5236a'}],
+ task:''},
+
+{id:'s32',wk:'W1',day:'D4',time:'11:15',dur:30,type:'training',
+ name:'Reporting: metrics and Growth SEO Dashboard',
+ short:'What we measure, how to update the dashboard',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Key metrics:</b> new backlinks, new unique referring domains, avg DR of linking sites, media coverage, outreach reply and publication rate.<br><br>
+<b>Growth SEO Dashboard:</b> walk through the tabs and what each tracks. Update frequency: weekly.`,
+ reads:[{icon:'📖',title:'Reporting and Analysis (Notion)',url:'https://www.notion.so/papernest/Reporting-Analysis-7eabd2ce77d4462f9588872ea21baad9'}],
+ task:''},
+
+{id:'s33',wk:'W1',day:'D4',time:'14:00',dur:90,type:'task',
+ name:'TASK: Set up Instantly sequence for first batch',
+ short:'Configure outreach sequence, ready to launch Day 6',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>IT2 (Martina):</b> journalist list from Day 3, outreach email in Spanish for a recent papernest ES study, sequence with one follow-up at day 4, validate with Oscar.<br><br>
+<b>FR (Matthias):</b> refine the PRVG+TRVE email, load journalist list into Instantly, sequence ready to launch Week 2 Day 1.`,
+ reads:[],
+ task:'Instantly sequence configured and validated by Oscar. Not launched yet, launches start of Week 2.'},
+
+// MARTINA ONLY
+{id:'sw03',wk:'W1',day:'D4',time:'09:00',dur:60,type:'task',
+ name:'🇪🇸 TASK: Solo Whale send — week 2 article (Martina)',
+ short:'Second Whale article, more autonomous this time',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`Pick the next topic, write with GPT process, get quick feedback, prepare for sending. This is the bridge between the shadowed session and full autonomy next week.`,
+ reads:[],task:''},
+
+// WEEK 1 — DAY 5
+{id:'s40',wk:'W1',day:'D5',time:'09:00',dur:60,type:'training',
+ name:'WordPress: publishing and SEO basics',
+ short:'WP interface, publishing a post, nofollow on journalist mentions',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`WP interface, categories, SEO title, meta description. When to nofollow. Google Search Console indexation check.`,
+ reads:[{icon:'📖',title:'SEO Optimization Essentials (Notion)',url:'https://www.notion.so/papernest/SEO-Optimization-Essentials-2291fb6f60ef80139a38f3766a9462cd'}],
+ task:''},
+
+{id:'s41',wk:'W1',day:'D5',time:'10:15',dur:30,type:'training',
+ name:'Email management: unsubscribe list, junk cleaning',
+ short:'Reading replies, managing bounces, junk cleanup',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<ul>
+<li>How to review the outreach reply inbox and what to do with each type</li>
+<li>Reply to all emails, including negatives</li>
+<li>Managing unsubscribe lists in Instantly and YAMM</li>
+<li>Junk cleaning: clean bounces, MAILER-DAEMON emails</li>
+</ul>`,
+ reads:[{icon:'📖',title:'Email Reading and Unsubscribe (Notion)',url:'https://www.notion.so/papernest/Email-Reading-Unsubscribe-List-9cc46b87c3294ab6a8d1b54425dab2a0'}],
+ task:''},
+
+{id:'s42',wk:'W1',day:'D5',time:'11:00',dur:90,type:'task',
+ name:'TASK: Brainstorm next campaigns, 5 ideas each',
+ short:'Review Ahrefs, seasonal calendar, competitor content',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Output format:</b> Title / Journalistic angle / Data source / Markets applicable.<br><br>
+Think about: upcoming regulatory publications, summer energy stories, autumn previews.`,
+ reads:[],
+ task:'5 ideas per intern in shared Google Sheet by end of Day 5.'},
+
+{id:'s43',wk:'W1',day:'D5',time:'14:00',dur:30,type:'task',
+ name:'Week 1 wrap-up: report to Oscar',
+ short:'Each intern sends their Week 1 summary',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Slack message format:</b><ul>
+<li>Completed this week, with numbers where possible</li>
+<li>In progress</li>
+<li>Blockers / questions</li>
+<li>Plan for Week 2</li>
+</ul>`,
+ reads:[],task:''},
+
+// MARTINA ONLY — full handover before EOW
+{id:'sw04',wk:'W1',day:'D5',time:'15:00',dur:60,type:'task',
+ name:'🇪🇸 Whale full handover check (Martina, last day with Eleonora)',
+ short:'Final confirmation Martina can run the whole Whale ES process solo from Monday',
+ who:['IT2'],status:'urgent',owner:'Oscar',
+ guide:`<b>This is the last day Eleonora is around.</b> Confirm: publisher DB access, YAMM template access, brainstorm doc, reporting tab access, any pending deals or contacts Martina needs to know about.<br><br>
+Document anything not yet written down before Eleonora leaves.`,
+ reads:[],
+ task:'Checklist confirmed: Martina has full access and knowledge to run Whale ES alone from Week 2.'},
+
+// ══════════════════════════════════════════════════════
+// WEEK 2
+// ══════════════════════════════════════════════════════
+{id:'s50',wk:'W2',day:'D1',time:'09:00',dur:60,type:'task',
+ name:'Week 2 kick-off: review Week 1 deliverables',
+ short:'Review journalist lists, email drafts, Whale articles',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Agenda:</b><ul>
+<li>Review each intern's journalist list, adjust quality before use</li>
+<li>Review outreach email drafts</li>
+<li>IT2: confirm full Whale autonomy this week, no more shadowing</li>
+<li>FR: final check on PRVG+TRVE email and Instantly sequence</li>
+</ul>`,
+ reads:[],task:''},
+
+{id:'s51',wk:'W2',day:'D1',time:'10:30',dur:30,type:'task',
+ name:'🇫🇷 TASK: Launch PRVG+TRVE outreach batch (Matthias)',
+ short:'Send embargo email to FR journalists, publication target Day 10–12',
+ who:['FR'],status:'urgent',owner:'Oscar',
+ guide:`Launch the Instantly sequence validated end of Week 1. Embargo to the publication date.<br><br>
+Monitor first hours: opens, bounces, early replies.`,
+ reads:[],task:'Sequence live by 11:00. Update Oscar on Slack with first metrics by EOD.'},
+
+{id:'s52',wk:'W2',day:'D1',time:'10:30',dur:45,type:'task',
+ name:'🇪🇸 TASK: First fully solo Whale send (Martina)',
+ short:'No shadowing this time. Martina owns the entire process.',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> First fully autonomous Whale operation, no Eleonora available anymore.<br><br>
+<ol style="margin:0 0 8px 16px">
+<li>Confirm article is reviewed and ready</li>
+<li>Prepare ES publisher list</li>
+<li>Configure YAMM, verify tracking</li>
+<li>Launch and monitor open rates</li>
+<li>Flag any blocker to Oscar immediately, do not get stuck alone</li>
+</ol>`,
+ reads:[],task:''},
+
+// DAY 2
+{id:'s60',wk:'W2',day:'D2',time:'09:00',dur:75,type:'task',
+ name:'🇪🇸 TASK: AC Report — Spain edition (Martina)',
+ short:'Build the AC report for the Spanish market, using ES data as base plus IT report for reference',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`<b>Context:</b> Italy market is closed, but the AC study built for Italy is kept as a structural reference alongside the Spanish base case.<br><br>
+<b>Process:</b>
+<ol style="margin:0 0 8px 16px">
+<li>Review both existing AC studies (ES base + IT reference) to understand structure and data sources used</li>
+<li>Confirm Spain as the primary market for this report — use Spanish sources: REE, CNMC, INE</li>
+<li>Extract summer AC consumption data for Spain</li>
+<li>Build the journalistic angle for the ES market</li>
+<li>Write the press release, use AI for the draft, review and edit</li>
+<li>Use the journalist DB from Week 1 (energy/consumer/lifestyle ES), no need to search from scratch</li>
+</ol>`,
+ reads:[{icon:'🔗',title:'papernest Studies (Spain)',desc:'Find the AC study and use it as the structural base',url:'https://www.papernest.es/estudios/'}],
+ task:'Spanish AC report: press release plus data plus journalist list ready for outreach by end of Day 3.'},
+
+{id:'s61',wk:'W2',day:'D2',time:'09:00',dur:60,type:'task',
+ name:'🇫🇷 TASK: Manage replies, then start AC report France (Matthias)',
+ short:'Handle PRVG/TRVE replies, then begin adapting AC report for France',
+ who:['FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Morning:</b> Check all replies to the PRVG/TRVE outreach. Reply to everyone, including negatives. Update Instantly.<br><br>
+<b>Afternoon:</b> Start adapting the AC report for France using the ES base and the IT reference. French sources: RTE, ADEME, ENEDIS.`,
+ reads:[],task:''},
+
+{id:'s62',wk:'W2',day:'D2',time:'14:00',dur:60,type:'task',
+ name:'TASK: Brainstorm next campaigns, 5 ideas each',
+ short:'Review Ahrefs, seasonal calendar, competitor content',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Output format: Title / Journalistic angle / Data source / Markets applicable. Think about upcoming regulatory publications and seasonal stories.`,
+ reads:[],
+ task:'5 ideas per intern in shared Google Sheet.'},
+
+// DAY 3
+{id:'s70',wk:'W2',day:'D3',time:'09:00',dur:45,type:'task',
+ name:'TASK: Reply management, outreach batch #2 prep',
+ short:'Handle pending replies, prep second journalist batch',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Reply to all emails from batch #1. Then pick the strongest idea from the brainstorm and prepare a second journalist list, different from batch #1.`,
+ reads:[],task:''},
+
+{id:'s71',wk:'W2',day:'D3',time:'10:00',dur:90,type:'task',
+ name:'🇪🇸 TASK: Whale week 2, second solo send (Martina)',
+ short:'Second fully autonomous Whale cycle',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`Same flow as before, fully solo. Document any blockers for end-of-week review with Oscar.`,
+ reads:[],task:''},
+
+{id:'s72',wk:'W2',day:'D3',time:'10:00',dur:90,type:'task',
+ name:'🇫🇷 TASK: Continue AC report France, follow-up PRVG/TRVE (Matthias)',
+ short:'Follow-up on non-replies, continue building the AC France report',
+ who:['FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Morning:</b> Send follow-up to journalists who have not replied to PRVG/TRVE.<br><br>
+<b>Rest of day:</b> Continue the FR AC report, data first then angle and press release.`,
+ reads:[],task:''},
+
+{id:'s73',wk:'W2',day:'D3',time:'14:00',dur:60,type:'task',
+ name:'TASK: Ahrefs reporting, update Growth SEO Dashboard',
+ short:'First real reporting cycle: metrics by market, new domains, backlinks period',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Export new backlinks from Ahrefs for assigned market. Calculate new unique domains, DR change, backlinks gained/lost. Update Growth SEO Dashboard. Slack summary to Oscar with 3 key insights and numbers.`,
+ reads:[{icon:'📖',title:'Reporting and Analysis (Notion)',url:'https://www.notion.so/papernest/Reporting-Analysis-7eabd2ce77d4462f9588872ea21baad9'}],
+ task:''},
+
+// DAY 4
+{id:'s80',wk:'W2',day:'D4',time:'09:00',dur:45,type:'task',
+ name:'TASK: Launch outreach batch #2',
+ short:'Second campaign live, different journalists from batch #1',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Configure and launch. Monitor first hours. Update reporting sheet.`,
+ reads:[],task:''},
+
+{id:'s81',wk:'W2',day:'D4',time:'10:00',dur:60,type:'task',
+ name:'🇪🇸 TASK: Whale pipeline ahead, briefs for next 2 weeks (Martina)',
+ short:'Build a small buffer of briefs so the pipeline never runs dry',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Ensure the ES Whale pipeline has a buffer, since Martina is now the only one running it.<br><br>
+Deliverable: briefs for the next 4–6 ES articles. Format: Topic / Angle / Target keywords / Length / Copywriter notes. Validate with Oscar before sending to copywriter.`,
+ reads:[],task:''},
+
+{id:'s82',wk:'W2',day:'D4',time:'10:00',dur:60,type:'task',
+ name:'🇫🇷 ⚡ TASK: PRVG+TRVE launch day prep (Matthias)',
+ short:'Final model update, press kit, ready to send the moment CRE publishes',
+ who:['FR'],status:'urgent',owner:'Oscar',
+ guide:`<b>Launch day plan:</b>
+<ol style="margin:0 0 8px 16px">
+<li>Verify CRE has published new prices</li>
+<li>Update PRVG + TRVE Excel model with final data</li>
+<li>Validate key figures with Oscar</li>
+<li>Send press kit to journalists who confirmed embargo</li>
+<li>Send to remaining list (no embargo)</li>
+<li>All day, monitor publications and replies</li>
+</ol>`,
+ reads:[],task:''},
+
+{id:'s83',wk:'W2',day:'D4',time:'14:00',dur:75,type:'task',
+ name:'TASK: Week 2 results analysis, report draft',
+ short:'Calculate full onboarding metrics. First full reporting cycle.',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Metrics: emails sent / opens / replies / articles published, open and reply rate vs benchmarks, new backlinks if any publication is live, learnings on what worked.<br><br>
+Format: Google Sheet plus Slack message with top 3 insights.`,
+ reads:[],task:''},
+
+// DAY 5
+{id:'s90',wk:'W2',day:'D5',time:'09:00',dur:45,type:'task',
+ name:'TASK: Launch outreach for AC report (Martina + Matthias)',
+ short:'Send AC Spain (Martina) and AC France (Matthias) to journalists',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Both interns launch their AC report outreach with different journalist lists, lifestyle plus consumer plus energy verticals. Monitor replies through the day.`,
+ reads:[],task:''},
+
+{id:'s91',wk:'W2',day:'D5',time:'14:00',dur:30,type:'task',
+ name:'End of onboarding wrap-up',
+ short:'What I can do solo, what I still need, commitments for next 2 weeks',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Slack message format:</b><ul>
+<li>I can do autonomously now</li>
+<li>Still need support on</li>
+<li>My commitments for next 2 weeks</li>
+</ul>
+This marks the end of formal onboarding.`,
+ reads:[],task:''},
+
+// ══════════════════════════════════════════════════════
+// BACKLOG
+// ══════════════════════════════════════════════════════
+{id:'sb1',wk:'TBD',day:'D1',time:'TBD',dur:90,type:'market',
+ name:'🇪🇸 PR ES — Calendar System overview (Martina, after Whale is solid)',
+ short:'PR Calendar System: ~99 tracked events, D-X/D-1/D-0 alerts, market and project-type filters',
+ who:['IT2'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Once Whale is fully autonomous, Martina moves into PR ES using the PR Calendar System (Google Sheets + Apps Script) Oscar built — the same one discussed in the Calendario chat.<br><br>
+<b>Cover:</b><ul>
+<li>How the calendar tracks ~99 events across markets with project-type classification</li>
+<li>D-X / D-1 / D-0 alert logic and what each trigger means operationally</li>
+<li>How filtering by market and project type works</li>
+<li>Grouped email output structure (PR vs Whale entries) and what Martina is responsible for vs what stays with Oscar</li>
+<li>How this connects to the journalist outreach flow she already knows from Week 1–2</li>
+</ul>
+<div class="tip"><strong>Sequencing note:</strong> Do not start this until Whale ES is fully stable and running without daily check-ins. PR adds real complexity, and overlapping both before either is solid risks dropping balls on both.</div>`,
+ reads:[],task:''},
+
+{id:'sb2',wk:'TBD',day:'D1',time:'TBD',dur:30,type:'training',
+ name:'Market overview: deeper dive',
+ short:'ES + FR media landscape, past campaigns, what worked and what did not',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`Broader session after 2–3 weeks of live experience. Past projects, media preferences per country, cultural differences in outreach.`,
+ reads:[],task:''},
+
+{id:'sb3',wk:'TBD',day:'D1',time:'TBD',dur:30,type:'training',
+ name:'Advanced data analysis',
+ short:'Deeper interpretation, chart choices for publications, correlations',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`After they have 2–3 reports under their belt. Focuses on improving analysis quality.`,
+ reads:[],task:''},
+
+// ── ONGOING SKILL-BUILDING (recurring, not tied to onboarding weeks) ──
+{id:'sb4',wk:'TBD',day:'D1',time:'TBD',dur:60,type:'training',
+ name:'Google Apps Script basics for automation',
+ short:'Automate repetitive Sheets work: alerts, data transfer between tabs, scheduled triggers',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Once they are comfortable with manual Sheets work, start automating the repetitive parts.<br><br>
+<b>Cover:</b><ul>
+<li>What Apps Script is and when it is worth using it vs a manual formula</li>
+<li>Reading and writing data between tabs programmatically</li>
+<li>Time-driven triggers: e.g. a script that runs every morning to check for new replies or flag stale outreach</li>
+<li>Simple email alerts: notify Oscar or themselves when something needs attention (a deal about to expire, a bounce rate spike)</li>
+<li>Walk through one real example already in use, like the PR Calendar's D-X/D-1/D-0 alert logic, and explain how it works under the hood</li>
+</ul>
+<div class="tip"><strong>Recurring session:</strong> Revisit every few weeks with a new small automation idea. Skill builds incrementally, not in one sitting.</div>`,
+ reads:[],
+ task:'Pick one repetitive manual task from their own workflow and automate it with a basic script, with Oscar reviewing.'},
+
+{id:'sb5',wk:'TBD',day:'D1',time:'TBD',dur:60,type:'training',
+ name:'Building simple internal tools (GitHub Pages)',
+ short:'How Oscar builds lightweight web apps and dashboards hosted on GitHub Pages',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Show that small, purpose-built tools often beat a messy spreadsheet, and that building one is not as hard as it sounds with AI assistance.<br><br>
+<b>Cover:</b><ul>
+<li>What GitHub Pages is and why it is a free, simple way to host a static tool</li>
+<li>Walk through one existing example, such as the onboarding tracker itself or the Growth SEO Dashboard companion app, and explain the structure</li>
+<li>How to describe a tool idea clearly enough for AI to build a working first version</li>
+<li>What makes a tool worth building: something used repeatedly, with a clear, narrow purpose</li>
+<li>Basic publishing flow: create a repo, enable Pages, share the link</li>
+</ul>
+<div class="tip"><strong>Not a coding course:</strong> The goal is knowing what is possible and how to direct the build, not writing code from scratch.</div>`,
+ reads:[],
+ task:'Identify one recurring manual process (theirs or the team\'s) that could become a simple tool, and describe it as a brief for Oscar or AI to build.'},
+
+{id:'sb6',wk:'TBD',day:'D1',time:'TBD',dur:45,type:'training',
+ name:'Optimising PR and reporting workflows with AI',
+ short:'Beyond basic prompts: building reusable templates and mini-workflows for recurring tasks',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> Move from one-off AI prompts to repeatable processes that save real time every week.<br><br>
+<b>Cover:</b><ul>
+<li>Building a reusable prompt template for recurring tasks: weekly reporting summary, outreach email personalisation, press release first drafts</li>
+<li>Chaining steps: data extract to AI summary to formatted Slack message, without redoing the setup each time</li>
+<li>Where automation breaks down: anything requiring real judgment (which journalist, which angle) still needs a human</li>
+<li>Review of templates already in use by the team and how to adapt them to a new market or topic</li>
+</ul>`,
+ reads:[],
+ task:'Build one reusable template for a task they do weekly, test it twice, and share the result with Oscar.'},
+
+{id:'sb7',wk:'TBD',day:'D1',time:'TBD',dur:45,type:'training',
+ name:'Dashboard literacy: reading and improving the Growth SEO Dashboard',
+ short:'Go beyond data entry — understand the dashboard structure well enough to suggest improvements',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> After weeks of updating the dashboard, move from data entry to actually understanding and improving it.<br><br>
+<b>Cover:</b><ul>
+<li>Full architecture: Input, Master Data, Data Bridge, Weekly Summary, Visual Overview tabs and how they connect</li>
+<li>Where the single consolidation script runs and what it actually does</li>
+<li>How to spot a broken formula or a data inconsistency before it shows up as a wrong number in a report</li>
+<li>How to propose a new metric or view without breaking the existing structure</li>
+</ul>`,
+ reads:[],task:''},
+
+{id:'sb8',wk:'TBD',day:'D1',time:'TBD',dur:45,type:'training',
+ name:'Process retrospective: what to automate next',
+ short:'Periodic session reviewing what is still manual and painful, and what is worth fixing next',
+ who:['IT2','FR'],status:'pending',owner:'Oscar',
+ guide:`<b>Goal:</b> A recurring checkpoint, not a one-time training. Revisit roughly monthly.<br><br>
+<b>Format:</b><ul>
+<li>Each person lists their 3 most repetitive or annoying manual tasks from the past few weeks</li>
+<li>Discuss together which ones are worth automating (script, tool, template) vs which are fine to keep manual</li>
+<li>Pick one to actually build before the next retrospective</li>
+</ul>
+<div class="tip"><strong>Why this matters:</strong> The team's tools (PR Calendar, Growth Dashboard, Link Exchange tracker) all started exactly this way, as a manual pain point someone decided to fix.</div>`,
+ reads:[],task:''},
+];
+
+let state = {intern:'all', week:'W1', view:'plan'};
+let detailId = null, editId = null;
+
+function endTime(t,d){if(t==='TBD')return'TBD';const[h,m]=t.split(':').map(Number),tot=h*60+m+d;return`${String(Math.floor(tot/60)).padStart(2,'0')}:${String(tot%60).padStart(2,'0')}`}
+function typeIcon(t){return{training:'📚',task:'✅',read:'📖',market:'🌍'}[t]||'📌'}
+function typeIcCls(t){return{training:'si-training',task:'si-task',read:'si-read',market:'si-market'}[t]||'si-training'}
+function typeTagCls(t){return{training:'t-tr',task:'t-tk',read:'t-rd',market:'t-mk'}[t]||'t-tr'}
+function typeLabel(t){return{training:'Training',task:'Task',read:'Reading',market:'Market'}[t]||t}
+function whoTags(who){return who.map(w=>{const m={IT2:'<span class="tag t-it2">🇪🇸 Martina</span>',FR:'<span class="tag t-fr">🇫🇷 Matthias</span>'};return m[w]||`<span class="tag t-all">${w}</span>`}).join('')}
+function statusSel(id,s){return`<select class="ssel ${s}" onchange="updStatus('${id}',this.value,this)"><option value="pending"${s==='pending'?' selected':''}>Pending</option><option value="progress"${s==='progress'?' selected':''}>In progress</option><option value="done"${s==='done'?' selected':''}>✅ Done</option><option value="urgent"${s==='urgent'?' selected':''}>⚡ Urgent</option></select>`}
+
+function filteredSlots(){
+  return SLOTS.filter(s=>{
+    if(s.wk!==state.week)return false;
+    if(state.intern!=='all'&&!s.who.includes(state.intern))return false;
+    return true;
+  });
+}
+
+function setIntern(id){
+  state.intern=id;
+  document.querySelectorAll('[id^="sbi-"]').forEach(el=>el.classList.remove('on'));
+  document.getElementById('sbi-'+id)&&document.getElementById('sbi-'+id).classList.add('on');
+  document.querySelectorAll('#mtb-intern .mtb-btn').forEach(b=>b.classList.toggle('on', b.dataset.v===id));
+  render();
+}
+function setWeek(w){
+  state.week=w;
+  document.querySelectorAll('[id^="sbw-"]').forEach(el=>el.classList.remove('on'));
+  document.getElementById('sbw-'+w)&&document.getElementById('sbw-'+w).classList.add('on');
+  document.querySelectorAll('#mtb-week .mtb-btn').forEach(b=>b.classList.toggle('on', b.dataset.v===w));
+  render();
+}
+function setView(v){
+  state.view=v;
+  document.querySelectorAll('[id^="sbv-"]').forEach(el=>el.classList.remove('on'));
+  document.getElementById('sbv-'+v)&&document.getElementById('sbv-'+v).classList.add('on');
+  document.querySelectorAll('#mtb-view .mtb-btn').forEach(b=>b.classList.toggle('on', b.dataset.v===v));
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('on'));
+  document.getElementById('v-'+v).classList.add('on');
+  render();
+}
+
+function render(){
+  if(state.view==='plan') renderPlan();
+  else if(state.view==='cal') renderCal();
+  else if(state.view==='all') renderAll();
+  else if(state.view==='interns') renderInterns();
+  updateProgress();
+}
+
+function renderPlan(){
+  const el=document.getElementById('plan-content');
+  const slots=filteredSlots();
+  const WK={W1:{label:'Week 1 — Foundations',sub:'Day 1–5 · 9:00–18:00'},W2:{label:'Week 2 — Live operations',sub:'Day 6–10 · 9:00–18:00'},TBD:{label:'Backlog',sub:'PR ES and longer-term sessions'}};
+  const notices={
+    W1:`<div class="notice n-info"><span>💡</span><div>Week 1 is training-heavy but with a parallel fast track: <b>Martina gets the full Whale ES walkthrough on Day 1</b> since Eleonora leaves Friday. <b>Matthias's FR market + PRVG/TRVE session</b> is run entirely by Oscar and can shift to whichever day he actually starts.</div></div>`,
+    W2:`<div class="notice n-warn"><span>⚡</span><div><b>Week 2 is all live ops.</b> Matthias: PRVG+TRVE outreach launches Day 1, publication around Day 10–12. Martina: fully solo Whale from Day 1, AC report Spain by Day 2–3.</div></div>`,
+    TBD:`<div class="notice n-ok"><span>✅</span><div>PR ES (Calendar System) starts for Martina once Whale is fully stable — not fixed to a specific week. Other sessions scheduled as needed.</div></div>`
+  };
+  const totalMin=slots.reduce((a,s)=>a+s.dur,0);
+  const done=slots.filter(s=>s.status==='done').length;
+
+  let html=`<div class="wk-hdr"><div><div class="wk-title">${WK[state.week].label}</div><div class="wk-sub">${WK[state.week].sub}</div></div><div class="wk-pills"><div class="wk-pill">⏱ <strong>${Math.round(totalMin/60*10)/10}h</strong> content</div><div class="wk-pill">📋 <strong>${slots.length}</strong> slots</div><div class="wk-pill">✅ <strong>${done}/${slots.length}</strong> done</div>${state.week==='W2'?'<div class="wk-pill urg">⚡ PRVG+TRVE</div>':''}</div></div>${notices[state.week]||''}`;
+
+  if(!slots.length){html+=`<div style="text-align:center;padding:48px;color:var(--n4)"><div style="font-size:36px;margin-bottom:8px">🔍</div>No slots for this filter</div>`;el.innerHTML=html;return;}
+
+  const DAY_ORDER=['D1','D2','D3','D4','D5'];
+  const byDay={};DAY_ORDER.forEach(d=>byDay[d]=[]);
+  slots.forEach(s=>{if(byDay[s.day])byDay[s.day].push(s);});
+  DAY_ORDER.forEach(d=>byDay[d].sort((a,b)=>a.time.localeCompare(b.time)));
+
+  html+=`<div class="days">`;
+  DAY_ORDER.forEach(day=>{
+    const ds=byDay[day];if(!ds.length)return;
+    const dt=(DAY_DATES[state.week]||{})[day]||'';
+    const trainMins=ds.reduce((a,s)=>a+s.dur,0);
+    const freeMins=480-trainMins;
+    html+=`<div class="day-card">
+      <div class="day-hdr" onclick="toggleDay('dc-${day}')">
+        <div class="day-name">${DAY_NAMES[day]}</div>
+        <div class="day-date">${dt}</div>
+        <div class="day-stats"><span>⏱ ${Math.round(trainMins/60*10)/10}h scheduled</span><span>🕓 ${Math.round(freeMins/60*10)/10}h free / autonomous</span></div>
+        <div class="day-chevron open" id="chv-${day}">▶</div>
+      </div>
+      <div class="day-body open" id="dc-${day}">`;
+    ds.forEach(s=>{
+      const icCls=s.status==='urgent'?'si-urgent':typeIcCls(s.type);
+      html+=`<div class="slot" id="slot-${s.id}">
+        <div class="slot-time">${s.time}<small>→ ${endTime(s.time,s.dur)}</small><small>${s.dur}min</small></div>
+        <div class="slot-body">
+          <div class="slot-icon ${icCls}">${typeIcon(s.type)}</div>
+          <div class="slot-info">
+            <div class="slot-name" onclick="openDetail('${s.id}')">${s.name}</div>
+            <div class="slot-desc">${s.short}</div>
+            <div class="slot-tags">
+              <span class="tag ${typeTagCls(s.type)}">${typeLabel(s.type)}</span>
+              ${whoTags(s.who)}
+              ${s.owner?`<span class="tag t-own">👤 ${s.owner}</span>`:''}
+            </div>
+            <div class="slot-edit-row">
+              <button class="edt-btn" onclick="openEdit('${s.id}')">✏️ Edit</button>
+              <button class="edt-btn del" onclick="confirmDelete('${s.id}')">🗑 Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="slot-actions">${statusSel(s.id,s.status)}</div>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+  html+=`</div>`;
+  el.innerHTML=html;
+}
+
+function toggleDay(id){
+  const body=document.getElementById(id);
+  const day=id.replace('dc-','');
+  const chv=document.getElementById('chv-'+day);
+  body.classList.toggle('open');
+  chv&&chv.classList.toggle('open');
+}
+
+function renderCal(){
+  const el=document.getElementById('cal-content');
+  if(state.week==='TBD'){el.innerHTML=`<div class="notice n-info"><span>ℹ️</span><div>Backlog items do not have scheduled times. Switch to Week 1 or Week 2 to see the calendar view.</div></div>`;return;}
+  const slots=filteredSlots();
+  const hours=['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+  const DAY_ORDER=['D1','D2','D3','D4','D5'];
+  const HOUR_H=36;
+  const PX_PER_MIN=HOUR_H/30;
+  const START_MIN=9*60;
+
+  const byDay={};DAY_ORDER.forEach(d=>byDay[d]=[]);
+  slots.forEach(s=>{if(byDay[s.day])byDay[s.day].push(s);});
+
+  const WK_LABEL=state.week==='W1'?'Week 1 (Day 1–5)':'Week 2 (Day 6–10)';
+  let html=`<div class="wk-hdr"><div><div class="wk-title">Calendar — ${WK_LABEL}</div><div class="wk-sub">Hover a block to see details, click to open</div></div></div>
+  <div class="cal-wrap"><div class="cal">
+  <div class="cal-hdr"><div class="cal-hdr-cell"></div>`;
+  DAY_ORDER.forEach(d=>{ html+=`<div class="cal-hdr-cell">${DAY_NAMES[d]}</div>`; });
+  html+=`</div><div class="cal-body">`;
+
+  const totalRows=hours.length;
+  html+=`<div class="cal-col">`;
+  hours.forEach(h=>{ html+=`<div class="cal-time">${h}</div>`; });
+  html+=`</div>`;
+
+  DAY_ORDER.forEach(day=>{
+    html+=`<div class="cal-col" style="position:relative;height:${totalRows*HOUR_H}px">`;
+    hours.forEach(()=>{ html+=`<div class="cal-hour"></div>`; });
+    byDay[day].forEach(s=>{
+      const [sh,sm]=s.time.split(':').map(Number);
+      const slotStart=sh*60+sm;
+      const top=(slotStart-START_MIN)*PX_PER_MIN;
+      const height=s.dur*PX_PER_MIN;
+      const cbCls=s.status==='urgent'?'cb-urgent':(`cb-${s.type}`);
+      const label=s.name.length>30?s.name.substring(0,28)+'…':s.name;
+      html+=`<div class="cal-block ${cbCls}" style="top:${top}px;height:${Math.max(height,18)}px" onclick="openDetail('${s.id}')" title="${s.name}">${label}</div>`;
+    });
+    html+=`</div>`;
+  });
+
+  html+=`</div></div></div>`;
+  html+=`<div class="cal-legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--pp)"></div>Training</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gr)"></div>Task / Practice</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#FF6C95"></div>Reading</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--ye)"></div>Market-specific</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--rd)"></div>Urgent</div>
+  </div>`;
+  el.innerHTML=html;
+}
+
+function renderAll(){
+  const el=document.getElementById('all-content');
+  const weeks={W1:'Week 1',W2:'Week 2',TBD:'Backlog'};
+  const filtered=state.intern==='all'?SLOTS:SLOTS.filter(s=>s.who.includes(state.intern));
+  if(!filtered.length){el.innerHTML=`<div style="text-align:center;padding:48px;color:var(--n4)"><div style="font-size:36px">📭</div>No trainings found</div>`;return;}
+  let html=`<div class="ov-wrap"><div class="ov-hdr"><div class="ov-th">#</div><div class="ov-th">Name</div><div class="ov-th">Phase</div><div class="ov-th">Assigned to</div><div class="ov-th">Type</div><div class="ov-th">Status</div></div>`;
+  filtered.forEach((s,i)=>{
+    html+=`<div class="ov-row" onclick="openDetail('${s.id}')">
+      <div class="ov-td"><span class="ov-num">${i+1}</span></div>
+      <div class="ov-td"><span class="ov-name">${s.name}</span></div>
+      <div class="ov-td"><span class="tag t-own">${weeks[s.wk]||s.wk} · ${DAY_NAMES[s.day]||s.day}</span></div>
+      <div class="ov-td">${whoTags(s.who)}</div>
+      <div class="ov-td"><span class="tag ${typeTagCls(s.type)}">${typeLabel(s.type)}</span></div>
+      <div class="ov-td" onclick="event.stopPropagation()">${statusSel(s.id,s.status)}</div>
+    </div>`;
+  });
+  html+=`</div>`;
+  el.innerHTML=html;
+}
+
+function renderInterns(){
+  const el=document.getElementById('interns-content');
+  el.innerHTML=INTERNS.map(intern=>{
+    const mine=SLOTS.filter(s=>s.who.includes(intern.id));
+    const done=mine.filter(s=>s.status==='done').length;
+    const pct=mine.length>0?Math.round(done/mine.length*100):0;
+    return`<div class="ic ${intern.cls}">
+      ${intern.id==='FR'?'<div style="position:absolute;top:10px;right:10px;background:var(--rd-l);color:var(--rd);border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700">⚡ flexible start</div>':''}
+      <div class="ic-top"><div class="sb-av ${intern.av}">${intern.initials}</div><div><div class="ic-name">${intern.name}</div><div class="ic-role">${intern.market}</div></div></div>
+      <div style="margin-bottom:8px;display:flex;gap:5px;flex-wrap:wrap"><span class="tag t-own">📅 ${intern.from} → ${intern.to}</span><span class="tag t-mk">${intern.ch}</span></div>
+      <div style="font-size:11px;color:var(--n6);margin-bottom:8px">${intern.note}</div>
+      <div class="ic-prog-l"><span>Progress</span><span>${done}/${mine.length}</span></div>
+      <div class="ic-prog"><div class="ic-pf ${intern.pf}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function updateProgress(){
+  INTERNS.forEach(i=>{
+    const mine=SLOTS.filter(s=>s.who.includes(i.id));
+    const done=mine.filter(s=>s.status==='done').length;
+    const pct=mine.length>0?Math.round(done/mine.length*100):0;
+    const el=document.getElementById('p-'+i.id.toLowerCase());
+    if(el)el.style.width=pct+'%';
+  });
+  const done=SLOTS.filter(s=>s.status==='done').length;
+  const el=document.getElementById('p-all');
+  if(el)el.style.width=(SLOTS.length>0?Math.round(done/SLOTS.length*100):0)+'%';
+}
+
+function updStatus(id,val,sel){
+  const s=SLOTS.find(x=>x.id===id);if(s)s.status=val;
+  sel.className=`ssel ${val}`;
+  updateProgress();
+}
+
+function openDetail(id){
+  const s=SLOTS.find(x=>x.id===id);if(!s)return;
+  detailId=id;
+  document.getElementById('d-badge').textContent=typeLabel(s.type).toUpperCase();
+  document.getElementById('d-badge').className=`m-badge tag ${typeTagCls(s.type)}`;
+  document.getElementById('d-title').textContent=s.name;
+  document.getElementById('d-sub').textContent=`${DAY_NAMES[s.day]||s.day} · ${s.time}–${endTime(s.time,s.dur)} · ${s.dur}min · ${s.wk==='W1'?'Week 1':s.wk==='W2'?'Week 2':'Backlog'}`;
+  document.getElementById('d-owner').textContent=s.owner||'—';
+
+  let body=`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px">${whoTags(s.who)}</div>`;
+  if(s.guide){body+=`<div class="m-sec"><div class="m-sec-title">Training guide</div><div class="m-text">${s.guide}</div></div>`;}
+  if(s.reads&&s.reads.length){
+    body+=`<div class="m-sec"><div class="m-sec-title">Readings and resources</div>`;
+    s.reads.forEach(r=>{body+=`<div class="ritem"><span>${r.icon||'📖'}</span><div><div class="ri-title">${r.title}</div>${r.desc?`<div class="ri-desc">${r.desc}</div>`:''} ${r.url?`<a href="${r.url}" target="_blank" class="ri-link">↗ Open resource</a>`:''}</div></div>`;});
+    body+=`</div>`;
+  }
+  if(s.task){body+=`<div class="m-sec"><div class="m-sec-title">Deliverable / practice</div><div class="titem"><span>✅</span><div class="ti-desc">${s.task}</div></div></div>`;}
+  body+=`<div class="m-sec"><div class="m-sec-title">Status</div>${statusSel(s.id,s.status)}</div>`;
+  document.getElementById('d-body').innerHTML=body;
+  openOv('ov-detail');
+}
+
+function openEditFromDetail(){closeOv('ov-detail');openEdit(detailId);}
+
+function openAdd(){editId=null;populateForm(null);document.getElementById('del-btn').style.display='none';document.getElementById('add-title').textContent='New slot';openOv('ov-add');}
+function openEdit(id){editId=id;const s=SLOTS.find(x=>x.id===id);if(!s)return;populateForm(s);document.getElementById('del-btn').style.display='flex';document.getElementById('add-title').textContent='Edit slot';openOv('ov-add');}
+
+function populateForm(s){
+  document.getElementById('f-name').value=s?s.name:'';
+  document.getElementById('f-short').value=s?s.short:'';
+  document.getElementById('f-week').value=s?s.wk:'W1';
+  document.getElementById('f-day').value=s?s.day:'D1';
+  document.getElementById('f-time').value=s?s.time:'09:00';
+  document.getElementById('f-dur').value=s?s.dur:60;
+  document.getElementById('f-type').value=s?s.type:'training';
+  document.getElementById('f-owner').value=s?s.owner:'Oscar';
+  document.getElementById('f-it2').checked=s?s.who.includes('IT2'):false;
+  document.getElementById('f-fr').checked=s?s.who.includes('FR'):false;
+  document.getElementById('f-guide').value=s&&s.guide?s.guide.replace(/<[^>]*>/g,''):'';
+  document.getElementById('f-reads').value=s&&s.reads?s.reads.map(r=>`${r.title}${r.url?` | ${r.url}`:''}`).join('\n'):'';
+  document.getElementById('f-task').value=s?s.task:'';
+}
+
+function saveSlot(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){alert('Name is required');return;}
+  const who=[];
+  if(document.getElementById('f-it2').checked)who.push('IT2');
+  if(document.getElementById('f-fr').checked)who.push('FR');
+  if(!who.length)who.push('IT2','FR');
+
+  const readsRaw=document.getElementById('f-reads').value.trim();
+  const reads=readsRaw?readsRaw.split('\n').filter(Boolean).map(line=>{const[title,url]=line.split('|').map(s=>s.trim());return{icon:'📖',title,url:url||''};}) : [];
+
+  const slot={
+    id:editId||'u'+Date.now(),wk:document.getElementById('f-week').value,day:document.getElementById('f-day').value,
+    time:document.getElementById('f-time').value||'09:00',dur:parseInt(document.getElementById('f-dur').value)||60,
+    type:document.getElementById('f-type').value,name,short:document.getElementById('f-short').value,
+    who,status:editId?(SLOTS.find(s=>s.id===editId)||{}).status||'pending':'pending',
+    owner:document.getElementById('f-owner').value||'Oscar',
+    guide:document.getElementById('f-guide').value.replace(/\n/g,'<br>'),
+    reads,task:document.getElementById('f-task').value
+  };
+  if(editId){const idx=SLOTS.findIndex(s=>s.id===editId);if(idx!==-1)SLOTS[idx]=slot;}
+  else SLOTS.push(slot);
+  closeOv('ov-add');render();
+}
+
+function confirmDelete(id){if(confirm('Delete this slot?'))deleteSlotById(id);}
+function deleteSlot(){if(editId&&confirm('Delete this slot?')){deleteSlotById(editId);closeOv('ov-add');}}
+function deleteSlotById(id){const idx=SLOTS.findIndex(s=>s.id===id);if(idx!==-1)SLOTS.splice(idx,1);render();}
+
+function openOv(id){document.getElementById(id).classList.add('open')}
+function closeOv(id){document.getElementById(id).classList.remove('open')}
+function closeOvClick(e,id){if(e.target===document.getElementById(id))closeOv(id)}
+
+document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+render();
+</script>
+</body>
+</html>
